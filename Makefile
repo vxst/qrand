@@ -14,14 +14,14 @@
 # along with qrand. If not, see <http://www.gnu.org/licenses/>.
 
 CXX = g++
-CXXFLAGS = -Wall -O3 -std=c++17 -march=native
+CXXFLAGS = -Wall -O3 -std=c++11 -march=native
 LDFLAGS = -ltestu01 -ltestu01probdist -ltestu01mylib
-
-test_u01: test_u01.cpp include/qrand.h
-	$(CXX) $(CXXFLAGS) -o test_u01 test_u01.cpp $(LDFLAGS)
 
 example: example.cpp include/qrand.h
 	$(CXX) $(CXXFLAGS) -o example example.cpp
+
+test_u01: test_u01.cpp include/qrand.h
+	$(CXX) $(CXXFLAGS) -o test_u01 test_u01.cpp $(LDFLAGS)
 
 .PHONY: clean test
 
