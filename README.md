@@ -43,6 +43,37 @@ int main(){
 }
 ```
 
+Or you can use the callable object as a drop in replacement for rand function:
+
+```c++
+#include <iostream>
+#include "qrand.h"
+
+int main(){
+    qrand randq;
+    for(int i = 0; i < 10; i++){
+        std::cout << randq() << " " << randq() % 100 << std::endl;
+    }
+}
+```
+
+There is no global state, so it's thread safe as long as it's thread local:
+
+```c++
+void some_thread_function(){
+    static thread_local qrand randq;
+    // call randq
+}
+```
+
+Or in OpenMP
+
+```c++
+extern qrand randq;
+#pragma omp threadprivate(randq)
+qrand randq;
+```
+
 To use the qrand library, simply include the header file `qrand.h`. The
 qrand uses VAES or AES-NI instructions to accelerate the random number
 generation. So it need to be compiled with either `-maes` or `-mvaes` option.
