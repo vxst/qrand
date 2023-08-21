@@ -37,9 +37,13 @@ int main(){
 
 To use the qrand library, simply include the header file `qrand.h`. The
 qrand uses VAES or AES-NI instructions to accelerate the random number
-generation. So it need to be compiled with `-mavx512f`, with either `-maes`
-or `-mvaes` option. The easiest way to compile is to use the provided
-`-march=native` option on a modern x86 CPU.
+generation. So it need to be compiled with either `-maes` or `-mvaes` option.
+
+The library utilizes the AVX2/AVX512F instructions if available. So it can
+be compiled with `-mavx2` or `-mavx512f` option to accelerate the performance.
+
+The easiest way to compile is to use the provided `-march=native` option on
+a modern x86 CPU.
 
 ## Algorithm
 
