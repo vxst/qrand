@@ -75,6 +75,24 @@ buf = AES_ROUND(buf, key)
 key = buf
 ```
 
+## Tested Platforms
+
+The qrand library is tested on following platforms:
+
+```text
+Intel Xeon E5-2650         (Sandy Bridge EP, AES-NI+SSE)
+Intel Xeon E5-2670 v2      (Ivy Bridge EP,   AES-NI+SSE)
+Intel Xeon E5-2686 v4      (Broadwell EP,    AES-NI+AVX2)
+Intel Xeon Platinum 8259CL (Cascade Lake,    AES-NI+AVX512F)
+Intel Xeon Platinum 8375C  (Ice Lake,        VAES+AVX512F)
+
+AMD EPYC 7571              (Zen/Naples,      AES-NI+AVX2)
+AMD EPYC 7R32              (Zen2/Rome,       AES-NI+AVX2)
+AMD EPYC 7R13              (Zen3/Milan,      VAES+AVX2)
+
+Apple M1                   (Rosetta 2/GCC,   AES-NI+SSE)
+```
+
 <!--
  Copyright (C) 2023 Chunqing Shan 
  
