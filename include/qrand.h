@@ -31,7 +31,7 @@ static inline void _qrand_vaes_round(__m512i& dt, __m512i key)
 
 static inline void _qrand_vadd_epi64(__m512i& v, uint64_t a, uint64_t b, uint64_t c, uint64_t d,
                                                  uint64_t e, uint64_t f, uint64_t g, uint64_t h)
-                                                 __attribute__ ((always_inline));
+                                    __attribute__ ((always_inline));
 static inline void _qrand_vadd_epi64(__m512i& v, uint64_t a, uint64_t b, uint64_t c, uint64_t d,
                                                  uint64_t e, uint64_t f, uint64_t g, uint64_t h)
 {
