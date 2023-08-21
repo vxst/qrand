@@ -21,7 +21,7 @@
 static inline void _qrand_vaes_round(__m512i& dt, __m512i key) __attribute__ ((always_inline));
 static inline void _qrand_vaes_round(__m512i& dt, __m512i key)
 {
-#ifdef __VAES__
+#if defined(__VAES__) && defined(__AVX512F__)
     dt = _mm512_aesenc_epi128(dt, key);
 #else
     for(int i = 0; i < 4; i++)
