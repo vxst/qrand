@@ -23,6 +23,10 @@ static inline void _qrand_vaes_round(__m512i& dt, __m512i key)
 {
 #if defined(__VAES__) && defined(__AVX512F__)
     dt = _mm512_aesenc_epi128(dt, key);
+#elif defined(__VAES__)
+    // AMD Zen 3(Roma) supports VAES but not AVX512F
+    for(int i = 0; i < 2; i++)
+        *(((__m256i*)&dt) + i) = _mm256_aesenc_epi128(*(((__m256i*)&dt) + i), *(((__m256i*)&key) + i));
 #else
     for(int i = 0; i < 4; i++)
         *(((__m128i*)&dt) + i) = _mm_aesenc_si128(*(((__m128i*)&dt) + i), *(((__m128i*)&key) + i));
