@@ -98,12 +98,9 @@ public:
 
     qrand(uint64_t seed){
         for(int i = 0; i < 8; i++){
-            ct[i] = seed;
-            keybuf[i] = 0;
-        }
-        fill();
-        for(int i = 0; i < 8; i++)
             ct[i] = 0;
+            keybuf[i] = seed;
+        }
         fill();
     }
 
