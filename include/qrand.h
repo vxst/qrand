@@ -16,9 +16,6 @@
 #pragma once
 #include <cstdint>
 #include <cstdlib>
-#include <cstdio>
-#include <stdexcept>
-#include <limits>
 #include <immintrin.h>
 
 class qrand{
@@ -26,7 +23,7 @@ protected:
     typedef uint64_t v512 __attribute__ ((vector_size (64)));
     v512 keybuf, ct;
     uint_fast8_t buf_i;
-    void fill()__attribute__ ((optimize("vect-cost-model=unlimited")))
+    void fill() __attribute__ ((optimize("vect-cost-model=unlimited")))
     {
         __m512i dt, add;
 
