@@ -60,8 +60,8 @@ protected:
     }
 public:
     using result_type = uint32_t;
-    static constexpr result_type min() { return std::numeric_limits<result_type>::min(); }
-    static constexpr result_type max() { return std::numeric_limits<result_type>::max(); }
+    static constexpr result_type min() { return 0; }
+    static constexpr result_type max() { return UINT32_MAX; }
 
     qrand(){
         arc4random_buf(&keybuf, sizeof(keybuf));
