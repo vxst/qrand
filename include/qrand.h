@@ -15,7 +15,7 @@
 
 #pragma once
 #include <cstdint>
-#include <cstdlib>
+#include <cstdio>
 #include <immintrin.h>
 
 static inline void _qrand_vaes_round(__m512i& dt, __m512i key) __attribute__ ((always_inline));
@@ -29,11 +29,11 @@ static inline void _qrand_vaes_round(__m512i& dt, __m512i key)
 #endif
 }
 
-static inline void _qrand_vadd_epi64(__m512i& v, uint64_t a, uint64_t b, uint64_t c, uint64_t d,
-                                                 uint64_t e, uint64_t f, uint64_t g, uint64_t h)
+static inline void _qrand_vadd_epi64(__m512i& v, std::uint64_t a, std::uint64_t b, std::uint64_t c, std::uint64_t d,
+                                                 std::uint64_t e, std::uint64_t f, std::uint64_t g, std::uint64_t h)
                                     __attribute__ ((always_inline));
-static inline void _qrand_vadd_epi64(__m512i& v, uint64_t a, uint64_t b, uint64_t c, uint64_t d,
-                                                 uint64_t e, uint64_t f, uint64_t g, uint64_t h)
+static inline void _qrand_vadd_epi64(__m512i& v, std::uint64_t a, std::uint64_t b, std::uint64_t c, std::uint64_t d,
+                                                 std::uint64_t e, std::uint64_t f, std::uint64_t g, std::uint64_t h)
 {
     __m512i add;
 #if defined(__AVX512F__)
@@ -58,9 +58,9 @@ static inline void _qrand_vadd_epi64(__m512i& v, uint64_t a, uint64_t b, uint64_
 
 class qrand{
 protected:
-    typedef uint64_t v512 __attribute__ ((vector_size (64)));
+    typedef std::uint64_t v512 __attribute__ ((vector_size (64)));
     v512 keybuf, ct;
-    uint_fast8_t buf_i;
+    std::uint_fast8_t buf_i;
     void fill() __attribute__ ((optimize("vect-cost-model=unlimited")))
     {
         __m512i dt;
@@ -85,18 +85,20 @@ protected:
         buf_i = 0;
     }
 public:
-    using result_type = uint32_t;
+    using result_type = std::uint32_t;
     static constexpr result_type min() { return 0; }
     static constexpr result_type max() { return UINT32_MAX; }
 
     qrand(){
-        arc4random_buf(&keybuf, sizeof(keybuf));
+        FILE* urandom = fopen("/dev/urandom", "rb");
+        fread(&keybuf, sizeof(keybuf), 1, urandom);
+        fclose(urandom);
         for(int i = 0; i < 8; i++)
             ct[i] = 0;
         fill();
     }
 
-    qrand(uint64_t seed){
+    qrand(std::uint64_t seed){
         for(int i = 0; i < 8; i++){
             ct[i] = 0;
             keybuf[i] = seed;
@@ -106,6 +108,6 @@ public:
 
     result_type operator()(){
         if(buf_i == 16) fill();
-        return ((uint32_t*)&keybuf)[buf_i++];
+        return ((std::uint32_t*)&keybuf)[buf_i++];
     }
 };
