@@ -3,15 +3,24 @@
 The qrand project is a high quality quick random number generator with
 following features:
 
-* High quality: Passes all tests in TestU01 BigCrush suite
+* High quality: Passes all tests in TestU01 BigCrush suite, has better
+  statistical properties than MT19937(if not properly seeded, which is
+  often the case)
 * Quick: The overhead for random number generation is at the same order
-  of magnitude as the time for a single function call. Actually, it's
-  THE fastest random number generator passes TestU01 BigCrush suite
+  of magnitude as the time for a single function call. It's THE fastest
+  random number generator passes TestU01 BigCrush suite, much faster than
+  MT19937 on modern CPUs
 * Reproducible: The random number generator is deterministic and
   reproducible
 * Long state: The state of the random number generator is 128 bytes, which
   is also 2 cache lines on most modern CPUs, making it as fast as possible
   but also retaining a long enough period for most applications
+
+Qrand is not cryptographic secure. It's a high performance, high quality,
+reproducible random number generator for simulation and other applications.
+
+It's intended to be used as a drop-in replacement for STL random number
+generators with better statistical properties and faster speed.
 
 ## Usage
 
