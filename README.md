@@ -1,4 +1,4 @@
-# qrand: High Quality Quick Random Number Generator
+# Qrand: High Quality Quick Random Number Generator
 
 The qrand project is a high quality quick random number generator with
 following features:
@@ -25,13 +25,12 @@ generators with better statistical properties and faster speed.
 ## Usage
 
 The qrand library is compatible with STL random number generators. It can
-be used as a drop-in replacement for STL random number generators. It also
-includes a qrand_float class which generates random floating point numbers.
+be used as a drop-in replacement for STL random number generators.
 
 ```c++
 #include <random>
 #include <iostream>
-#include "include/qrand.h"
+#include "qrand.h"
 
 int main(){
     std::uniform_int_distribution<int> dist(0, 100);
